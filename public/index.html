@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset = "UTF-8">
+    <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+    <title>MarsPics</title>
+    <link rel = "stylesheet" href = "styles.css">
+    <link rel="shortcut icon" href="./imgs/icons/marspics_icon.png" type="image/x-icon">
+</head>
+<body>
+    <img class = "header__marsPicsLogo" src = "./imgs/icons/marspics_icon.png" alt="marsPicsLogo">
+    <header class = "header">
+        <div class="empty"></div>
+        
+    </header>
+    <main class="menu">
+        <img class = "menu__img menu__components" src ="./imgs/rover_blank.png" alt ="Curiosity Rover">
+        <h1 class = "menu__roverTitle">Pick a rover</h1>
+        <div class = "menu__roverIcons menu__components" id="menu__roverIcons">
+            <img class = "roverIcons_curiosity menu__components" id = "curiosity" src ="./imgs/curiosity_white.png" alt ="curiosity icon">
+            <img class = "roverIcons_opportunity menu__components" id = "opportunity" src ="./imgs/opportunity_white.png" alt ="opportunity icon">
+            <img class = "roverIcons_spirit menu__components"  id = "spirit" src ="./imgs/spirit_rover_white.png" alt="spirit icon">
+        </div>
+        <p class = "menu__roverMission menu__components">Rover Mission</p>
+        <div class="menu__inputValues">
+            <h6 id="dateMessage"></h6>
+            <input class = "inputValues__startDate menu__components" type ="date" name ="date" id ="date">
+           
+            <button class = "inputValues__submitBtn menu__components" type="button"> Get Photos </button>
+        </div>
+        <div class="empty2"></div>
+    </main>
+
+    <div class="photoGallery">
+        <div class="container">
+            <div class="main">
+                <img src="" alt="" id = "current">
+                <h2 id="loading"></h2>
+              </div>
+    
+              <div class="imgs">
+              </div>
+        </div>
+    </div>
+
+    <footer>
+        <h6>Made by Abrahan Martinez</h6>
+    </footer>
+    <script src="./script.js"></script>
+</body>
+</html>
