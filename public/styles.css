@@ -18,12 +18,13 @@
 
 body {
     width: 100%;
+    height: 100vh;
+    margin-bottom: 30px;
     background: linear-gradient(45deg, var(--primary-color) 0%, var(--secondary-color) 47%, rgba(70,125,142,1) 10200%);
     font-family: 'Space Mono', monospace;
     color: white;
     display: flex;
     flex-direction: column;
-    /* overflow: hidden; */
 }
 
 a {
@@ -31,6 +32,7 @@ a {
     text-decoration: none;
     color: var(--textBorder-color);
 }
+
 
 /* mobile-first */
 .menu {
@@ -40,6 +42,8 @@ a {
     text-align: center;
 }
 
+
+
 .header {
     width: 80%;
     margin-left: 20%;
@@ -48,6 +52,16 @@ a {
     border-radius: 0% 100% 0% 78% / 100% 84% 0% 0%;
     text-align: right;
 }
+
+.header__marsPicsLogo {
+    position: fixed;
+    width: 50px;
+    top: .75em;
+    right: .75em;
+    z-index: 2;
+}
+
+
 .empty {
     width: 45px;
     padding-top: 10em;
@@ -56,14 +70,7 @@ a {
 .empty2 {
     height: 100px;
 }
-.header__marsPicsLogo {
-    position: fixed;
-    width: 50px;
-    top: .75em;
-    right: .75em;
-    z-index: 2;
 
-}
 
 
 .menu__img {
@@ -72,11 +79,13 @@ a {
   
     border-radius: 50%;
 }
+
 .menu__roverTitle {
     font-size: 1.5rem;
     font-weight: 400;
     letter-spacing: .25rem;
 }
+
 #menu__roverIcons {
     width: 45%;
     margin: 30px auto;
@@ -105,6 +114,7 @@ a {
 .menu__components {
     margin: 18px 0;
 }
+
 
 input, button {
     display: inline-block;
@@ -147,6 +157,7 @@ button:hover {
     color: var(--textBorder-color);
     border-color: var(--primary-color)
 }
+
 .menu__inputValues {
     display: flex;
     flex-flow: column;
@@ -154,15 +165,22 @@ button:hover {
     align-items: center;
 }
 
+
+
 footer {
-    height: 7vh;
-    margin-top:-20px;
-    background-color: black;
+    width: 100%;
+    margin-top:-50px;
     font-size: 1rem;
     font-weight: 400;
     text-align: center;
     padding: 1em 0;
 }
+
+footer h6 {
+    color: rgba(255, 255, 255, 0.1);
+}
+
+
 
 /* photo gallery */
 .photoGallery {
@@ -176,9 +194,8 @@ footer {
     border-radius: 0% 100% 0% 0% / 0% 20% 0% 0%;
     overflow: hidden;
     text-align: center;
-   
-
 }
+
 .container {
     width: 100%;
     max-width: 900px;
@@ -229,6 +246,9 @@ footer {
         opacity: 1
     }
 }
+
+
+
 /*tablets*/
 @media screen and (min-width: 530px) {
     #menu__roverIcons {
@@ -254,6 +274,7 @@ footer {
         overflow: scroll;
     }
 }
+
 
 /*desktop*/
 @media screen and (min-width: 1000px) {

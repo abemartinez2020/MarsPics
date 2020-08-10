@@ -1,4 +1,3 @@
-/*environment variable for api key*/
 const submitBtn = document.querySelector('.inputValues__submitBtn');
 const photoGalleryModal = document.querySelector('.photoGallery');
 const logoToX = document.querySelector('.header__marsPicsLogo');
@@ -12,7 +11,8 @@ const loading = document.querySelector('#loading');
 
 let roverSelected;
 
-//Todays date minus one day
+
+//Todays date minus one day for API proper date formating
 const today = new Date();
 console.log(today);
 const month = () => { 
@@ -23,6 +23,7 @@ const month = () => {
      return monthNumbr;
 }
 
+
 const day = () => { 
     dayNumbr = today.getDate()
      if (dayNumbr < 10) {
@@ -31,10 +32,12 @@ const day = () => {
      return dayNumbr - 1;
 }
 
+
 const todayDate = `${today.getFullYear()}-${month()}-${day()}`;
 dateData.setAttribute('max', todayDate);
 
-//rover icon selection
+
+//Rover icon selection
 roverIcons.addEventListener('click',(e) => {
     const icon = e.target;
     if(icon.getAttribute('id') === 'curiosity') {
@@ -75,65 +78,56 @@ roverIcons.addEventListener('click',(e) => {
 })
 
 
-
-
-    //fetch data  & photo gallery functionality
+//Fetch data  & photo gallery functionality
 const imgGal = document.querySelector('.imgs');
 let imgsNodeList = 0;
 const current = document.querySelector('#current');
 const opacity = 1;
 
 
-
 const imgClick = (e) => {
-    //reset opacity for all images
+    //Reset opacity for all images
     imgsNodeList.forEach(img => img.style.opacity = 0.6);
 
-    //change current image to src of clicked image
+    //Change current image to src of clicked image
     current.src = e.target.src;
 
     //Add fade in class
     current.classList.add('fade-in');
 
-    //remove fadin class after 5 seconds
+    //Remove fadin class after 5 seconds
     setTimeout(() => {
         current.classList.remove('fade-in')
     }, 500);
     
-    //change opacity to the opacity variable
+    //Change opacity to the opacity variable
     e.target.style.opacity = opacity;
 }
 
-    function changeImg(data) {
-        current.setAttribute('src', data.photos[0].img_src);
-        loading.textContent = '';
 
-        for( i = 0; i <= 7; i++) {
-            if(!data.photos[i].img_src) {
-               return console.log(`no image for image spot ${i}/8`);
+const changeImg = (data) => {
+    current.setAttribute('src', data.photos[0].img_src);
+    loading.textContent = '';
+
+    for( i = 0; i <= 7; i++) {
+        if(!data.photos[i].img_src) {
+            return console.log(`no image for image spot ${i}/8`);
             }
-            const img = document.createElement('img');
-            img.setAttribute('src', data.photos[i].img_src);
-            imgGal.appendChild(img);
+        const img = document.createElement('img');
+        img.setAttribute('src', data.photos[i].img_src);
+        imgGal.appendChild(img);
         }
-        imgsNodeList = document.querySelectorAll('.imgs img');
-        imgsNodeList[0].style.opacity = opacity;
-        imgsNodeList.forEach((img) => img.addEventListener('click',imgClick));
-    }
 
-    // const getData = async (rover, date, key) => {
-    //     let response =  await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${date}&api_key=${key}`);
-    //    let data =await response.json();
-    //     changeImg(data);
-    // }
+    imgsNodeList = document.querySelectorAll('.imgs img');
+    imgsNodeList[0].style.opacity = opacity;
+    imgsNodeList.forEach((img) => img.addEventListener('click',imgClick));
+}
 
-    const getData = async (rover, date) => {
-        let response = await fetch(`/photos?rover=${rover}&date=${date}`);
-        let data = await response.json();
-        changeImg(data);
-    }
-
-
+const getData = async (rover, date) => {
+    let response = await fetch(`/photos?rover=${rover}&date=${date}`);
+    let data = await response.json();
+    changeImg(data);
+}
 
 
 submitBtn.addEventListener('click', () => {
@@ -142,6 +136,7 @@ submitBtn.addEventListener('click', () => {
         return dateMessage.innerHTML = 'Please select a rover and pick a photo date.'
     }
 
+    //Reseting modal and messages
     imgGal.innerHTML = '';
     dateMessage.innerHTML = '';
     current.setAttribute('src','');
@@ -149,12 +144,11 @@ submitBtn.addEventListener('click', () => {
 
     getData(roverSelected, dateData.value);
    
-
-
     photoGalleryModal.style.display = 'block';
     logoToX.setAttribute('src',"./imgs/icons/exit_modal_icon.png" )
     logoToX.style.cursor = "pointer";
 })
+
 
 logoToX.addEventListener('click', () => {
     photoGalleryModal.style.display = 'none';
