@@ -12,6 +12,7 @@ const loading = document.querySelector('#loading');
 let roverSelected;
 
 
+
 //Todays date minus one day for API proper date formating
 const today = new Date();
 console.log(today);
@@ -106,7 +107,17 @@ const imgClick = (e) => {
 
 
 const changeImg = (data) => {
-    current.setAttribute('src', data.photos[0].img_src);
+    if(!data.photos.length) {
+        if(roverSelected === 'spirit') {
+            return loading.textContent = 'No images found for this date. Spirit Rover Activity: 01/05/2004 - 03/21/2010';
+        } else if (roverSelected === 'opportunity') {
+            return loading.textContent = 'No images found for this date. Opportunity Rover Activity: 01/26/2004 - 05/17/2018';
+        } else {
+            return loading.textContent = 'No images found for this date. Curiosity Rover Activity: 08/06/2012 - to date';
+        }
+        
+    } else {
+        current.setAttribute('src', data.photos[0].img_src);
     loading.textContent = '';
 
     for( i = 0; i <= 7; i++) {
@@ -121,11 +132,14 @@ const changeImg = (data) => {
     imgsNodeList = document.querySelectorAll('.imgs img');
     imgsNodeList[0].style.opacity = opacity;
     imgsNodeList.forEach((img) => img.addEventListener('click',imgClick));
+    }
+    
 }
 
 const getData = async (rover, date) => {
     let response = await fetch(`/photos?rover=${rover}&date=${date}`);
     let data = await response.json();
+    console.log(data);
     changeImg(data);
 }
 
@@ -154,5 +168,6 @@ logoToX.addEventListener('click', () => {
     photoGalleryModal.style.display = 'none';
     logoToX.setAttribute('src', './imgs/icons/marspics_icon.png');
     logoToX.style.cursor = "none";
+    dateData.value = '';
 })
 
